@@ -1,0 +1,134 @@
+# 🧪 Relatório de Testes — TVLar Motos
+
+**Testador:** Adriel Souza de Almeida 
+**Data:** Maio/2026  
+**Site testado:** TVLar Motos  
+**Tipo de teste:** Teste Exploratório Manual  
+
+---
+
+## Resumo
+
+Foram realizados testes manuais no site da TVLar Motos com foco nas funcionalidades de busca de peças, carrinho de compras e mensagens ao usuário. Foram encontrados **3 bugs**, sendo 1 de severidade alta, 1 média e 1 baixa.
+
+---
+
+## Bugs Encontrados
+
+---
+
+### 🔴 BUG-001 — Campo de busca não retorna resultados para termos parciais de modelo
+
+| Campo | Descrição |
+|---|---|
+| **ID** | BUG-001 |
+| **Severidade** | Alta |
+| **Prioridade** | Alta |
+| **Status** | Aberto |
+| **Funcionalidade** | Campo de busca de peças |
+
+**Descrição:**  
+Ao buscar pelo termo "FZ" no campo de pesquisa, o sistema não retorna nenhuma peça relacionada às motos da linha FZ (FZ15 e FZ25). Apenas são exibidas sugestões genéricas para melhorar a busca. No entanto, ao digitar "FZ15" o sistema retorna corretamente as peças da moto.
+
+**Passos para reproduzir:**
+1. Acessar o site da TVLar Motos
+2. Localizar o campo de busca de peças
+3. Digitar "FZ" e pressionar Enter ou clicar em buscar
+4. Observar o resultado
+
+**Resultado obtido:**  
+Nenhuma peça é exibida. O sistema mostra apenas sugestões como: "Certifique-se de escrever corretamente todas as palavras", "Tente palavras-chave diferentes" e "Tente palavras-chave mais genéricas".
+
+**Resultado esperado:**  
+Ao buscar "FZ", o sistema deveria retornar peças relacionadas às motos FZ15 e FZ25, pois ambas compartilham a maioria das peças. Um cliente que não sabe a versão exata da moto deveria conseguir encontrar os produtos apenas com o modelo base "FZ".
+
+**Sugestão de melhoria:**  
+Implementar busca por termos parciais ou sinônimos de modelos, associando "FZ" às variantes FZ15 e FZ25 no sistema.
+
+---
+
+### 🟡 BUG-002 — Sistema permite adicionar quantidade de peças maior que o estoque disponível sem aviso prévio
+
+| Campo | Descrição |
+|---|---|
+| **ID** | BUG-002 |
+| **Severidade** | Média |
+| **Prioridade** | Alta |
+| **Status** | Aberto |
+| **Funcionalidade** | Seleção de quantidade / Carrinho de compras |
+
+**Descrição:**  
+É possível selecionar uma quantidade de peças maior do que a disponível em estoque. O sistema só informa a indisponibilidade da quantidade no momento em que o cliente clica para adicionar ao carrinho, e não durante a seleção da quantidade.
+
+**Passos para reproduzir:**
+1. Acessar o site da TVLar Motos
+2. Buscar uma peça disponível no estoque
+3. No campo de quantidade, digitar um número maior do que o estoque disponível
+4. Clicar em "Comprar" ou "Adicionar ao carrinho"
+5. Observar quando a mensagem de erro aparece
+
+**Resultado obtido:**  
+O sistema permite selecionar qualquer quantidade sem validação. A mensagem de erro só aparece após o cliente tentar finalizar a compra.
+
+**Resultado esperado:**  
+O sistema deveria informar ao cliente em tempo real (durante a seleção de quantidade) que a quantidade solicitada não está disponível em estoque, evitando que o cliente perca tempo no processo de compra.
+
+**Impacto:**  
+Má experiência do usuário. O cliente pode se frustrar ao descobrir a indisponibilidade apenas no final do processo de compra.
+
+**Sugestão de melhoria:**  
+Adicionar validação em tempo real no campo de quantidade, limitando o valor máximo ao estoque disponível ou exibindo um aviso imediatamente ao ultrapassar a quantidade disponível.
+
+---
+
+### 🟢 BUG-003 — Erro de português na mensagem de produto indisponível
+
+| Campo | Descrição |
+|---|---|
+| **ID** | BUG-003 |
+| **Severidade** | Baixa |
+| **Prioridade** | Média |
+| **Status** | Aberto |
+| **Funcionalidade** | Mensagem de erro de estoque |
+
+**Descrição:**  
+A mensagem exibida ao cliente quando a quantidade solicitada não está disponível contém um erro de acentuação na palavra "indisponível".
+
+**Passos para reproduzir:**
+1. Acessar o site da TVLar Motos
+2. Tentar comprar uma peça com quantidade maior que o estoque
+3. Observar a mensagem de erro exibida
+
+**Resultado obtido:**  
+> "Produto indisponÃvel, Não temos a quantidade informada para este produto"
+
+**Resultado esperado:**  
+> "Produto indisponível, não temos a quantidade informada para este produto"
+
+**Causa provável:**  
+Problema de encoding de caracteres (UTF-8) no texto da mensagem de erro no sistema.
+
+---
+
+## Resumo dos Bugs
+
+| ID | Descrição | Severidade | Status |
+|---|---|---|---|
+| BUG-001 | Busca por "FZ" não retorna peças da linha FZ | 🔴 Alta | Aberto |
+| BUG-002 | Quantidade acima do estoque sem aviso prévio | 🟡 Média | Aberto |
+| BUG-003 | Erro de português na mensagem de indisponibilidade | 🟢 Baixa | Aberto |
+
+---
+
+## Ambiente de Teste
+
+| Item | Detalhe |
+|---|---|
+| Tipo de teste | Exploratório Manual |
+| Navegador | [Informar navegador utilizado] |
+| Dispositivo | [Informar dispositivo] |
+| Data | Abril/2026 |
+
+---
+
+*Relatório elaborado como parte do portfólio de QA — testes realizados em site público.*
